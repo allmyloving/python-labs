@@ -1,3 +1,6 @@
+from functools import reduce
+
+
 def find_determinant(matrix):
     if len(matrix[0]) != len(matrix):
         raise ValueError("Matrix is not a square one")
@@ -9,15 +12,13 @@ def process_gaussian_elimination(matrix):
     for k in range(0, len(matrix)):
         for i, line in enumerate(matrix[k + 1:len(matrix)]):
             coef = determine_coef(matrix[k][k], line[k])
+            # matrix[i] = [elem + coef * matrix[k][j] for j, elem in enumerate(line)]
             for j, elem in enumerate(line):
                 line[j] += coef * matrix[k][j]
 
 
 def multiply_main_diagonal(matrix):
-    result = matrix[0][0]
-    for i in range(1, len(matrix)):
-        result *= matrix[i][i]
-    return result
+    return reduce(lambda x, y: x * y, [matrix[i][i] for i in range(len(matrix))])
 
 
 def determine_coef(a0, ax):
@@ -26,9 +27,7 @@ def determine_coef(a0, ax):
 
 def print_matrix(matrix):
     for line in matrix:
-        for elem in line:
-            print(elem, end=" ")
-        print()
+        print(line)
 
 
 if __name__ == '__main__':
