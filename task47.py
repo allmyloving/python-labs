@@ -1,4 +1,5 @@
 class BigNum:
+    # convert integer to list of digits
     @staticmethod
     def to_list(num):
         list = []
@@ -34,12 +35,14 @@ class BigNum:
         result[0:BigNum.get_zero_index(result)] = []
         self.value = result
 
+    # get index of first non-zero element
     @staticmethod
     def get_zero_index(list):
         for index in range(len(list)):
             if list[index] != 0:
                 return index
 
+    # count digits in a BigNum
     def get_digit_matrix(self):
         matrix = [0] * 10
         for element in self.value:
@@ -52,6 +55,8 @@ class BigNum:
             result += str(i)
         return result
 
+
+# get value of 100!
 def factorial_numbers():
     num = BigNum(1)
     for i in range(1, 101):

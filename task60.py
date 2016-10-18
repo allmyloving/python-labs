@@ -12,7 +12,6 @@ def process_gaussian_elimination(matrix):
     for k in range(0, len(matrix)):
         for i, line in enumerate(matrix[k + 1:len(matrix)]):
             coef = determine_coef(matrix[k][k], line[k])
-            # matrix[i] = [elem + coef * matrix[k][j] for j, elem in enumerate(line)]
             for j, elem in enumerate(line):
                 line[j] += coef * matrix[k][j]
 
@@ -21,6 +20,7 @@ def multiply_main_diagonal(matrix):
     return reduce(lambda x, y: x * y, [matrix[i][i] for i in range(len(matrix))])
 
 
+# get coefficient for gaussian elimination algorithm
 def determine_coef(a0, ax):
     return (-1) * ax / a0
 
@@ -33,7 +33,5 @@ def print_matrix(matrix):
 if __name__ == '__main__':
     matrix = [[2, 1, -1], [-3, -1, 2], [-2, 1, 2]]
     matrix2 = [[3, 1, -2, 7], [-3, 5, 1, 9], [12, 2, 3, -2], [-6, 3, -2, 1]]
-    # print(len(matrix))
-    # print(len(matrix[0]))
     print(find_determinant(matrix))
     print(find_determinant(matrix2))
