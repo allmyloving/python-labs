@@ -1,9 +1,5 @@
-def celsius_to_fahrenheit(grad):
-    return grad * 9 / 5 + 32
-
-
 def to_fahrenheit(grads):
-    return list(map(celsius_to_fahrenheit, grads))
+    return list(map(lambda x: x * 9 / 5 + 32, grads))
 
 
 if __name__ == '__main__':
