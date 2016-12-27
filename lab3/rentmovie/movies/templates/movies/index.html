@@ -1,0 +1,9 @@
+{% if sorted_movie_list %}
+    <ul>
+    {% for movie in sorted_movie_list %}
+        <li><a href="/movies/{{ movie.id }}/">{{ movie.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No movies found.</p>
+{% endif %}
