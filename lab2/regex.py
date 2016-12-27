@@ -1,3 +1,4 @@
+# Проверить валидность арифметического выражения
 import re
 
 INTEGER = '\d+'
@@ -18,17 +19,20 @@ def is_syntax_valid(input):
 
 
 def are_brackets_valid(input):
-    counter = 0
+    stack = []
     for i in input:
         if i == '(':
-            counter += 1
+            stack.append(i)
         elif i == ')':
-            counter -= 1
-    return counter == 0
+            if not stack:
+                return False
+            if stack[-1] == '(':
+                stack.pop()
+    return len(stack) == 0
 
 
 if __name__ == '__main__':
-    invalid_expressions = ["23-", "2-3(", ")2-34", "2(-)34", "(2-)34"]
+    invalid_expressions = ["23-", "2)+2*(3", "2-3(", ")2-34", "2(-)34", "(2-)34", ")(5+1()", ")1-2(", "((1)))(", "(1+1)+1"]
     for i in invalid_expressions:
         print("%s is valid: %r" % (i, is_expression_valid(i)))
 
