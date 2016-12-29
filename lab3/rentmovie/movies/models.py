@@ -7,5 +7,5 @@ class Director(models.Model):
 
 class Movie(models.Model):
     name = models.CharField(max_length=100)
-    year = models.PositiveSmallIntegerField
+    year = models.PositiveSmallIntegerField()
     director = models.ForeignKey(Director)

@@ -1,1 +1,17 @@
-{{ movie }}
+{{ movie.name }}<br/>
+{{ movie.year }}<br/>
+{{ movie.director.name }}<br/>
+
+<h2>Update movie</h2>
+<form action="{% url 'movies:update' movie.id %}" method="post">
+    {% csrf_token %}
+    New name: <input name="name" /><br/>
+    New year: <input type="number" name="year"/><br/>
+    New director:
+        {% for director in director_list %}
+            <input type="radio" name="director" id="director{{ forloop.counter }}" value="{{ director.id }}"/>
+            <label for="director{{ forloop.counter }}">{{ director.name }}</label>
+            <br/>
+        {% endfor %}
+    <input type="submit" value="Update"/>
+</form>
