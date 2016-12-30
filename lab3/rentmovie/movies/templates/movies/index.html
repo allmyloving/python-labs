@@ -7,3 +7,7 @@
 {% else %}
     <p>No movies found.</p>
 {% endif %}
+
+<form action="{% url 'movies:create' %}" method="get">
+    <input type="submit" value="Create new movie"/>
+</form>

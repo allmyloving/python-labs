@@ -48,3 +48,28 @@ def director_exists(director_id):
         return True
     except Director.DoesNotExist:
         return False
+
+
+def create(request):
+    if request.method == 'GET':
+        return create_movie_view(request)
+
+    year = request.POST['year']
+    director_id = request.POST.get('director', '')
+    name = request.POST['name']
+    if name and year and director_id and director_exists(director_id):
+        Movie.objects.create(name=name, year=year, director_id=director_id)
+        return index(request)
+    return create_movie_view(request, name=name, year=year, form_error='Some fields are invalid')
+
+
+def create_movie_view(request, name=None, year=None, form_error=None):
+    director_list = Director.objects.all()
+    return render(request, "movies/create.html", {'director_list': director_list, 'form_error': form_error,
+                                                  'name': name, 'year': year})
+
+
+def delete(request, movie_id):
+    if request.method == 'DELETE':
+        Movie.objects.filter(pk=movie_id).delete()
+    return index(request)

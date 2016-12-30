@@ -2,6 +2,11 @@
 {{ movie.year }}<br/>
 {{ movie.director.name }}<br/>
 
+<br/>
+<form action="{% url 'movies:delete' movie.id %}" method="delete">
+  <input type="submit" value="Delete movie"/>
+</form>
+
 <h2>Update movie</h2>
 <form action="{% url 'movies:update' movie.id %}" method="post">
     {% csrf_token %}

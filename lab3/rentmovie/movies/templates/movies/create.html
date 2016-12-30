@@ -1,0 +1,19 @@
+
+{% if form_error %}
+            <div class="alert alert-danger">
+                <strong>{{ form_error|escape }}</strong>
+            </div>
+{% endif %}
+
+<form action="{% url 'movies:create' %}" method="post">
+    {% csrf_token %}
+    Name: <input name="name" value="{{ name }}"/><br/>
+    Year: <input type="number" name="year" value="{{ year }}"/><br/>
+    Director:
+        {% for director in director_list %}
+            <input type="radio" name="director" id="director{{ forloop.counter }}" value="{{ director.id }}"/>
+            <label for="director{{ forloop.counter }}">{{ director.name }}</label>
+            <br/>
+        {% endfor %}
+    <input type="submit" value="Create"/>
+</form>
